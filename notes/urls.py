@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import GptView
+from notes.views.ai import GenerateText
 
 urlpatterns = [
-    path("poops/", GptView.as_view(), name='poop')
+    path("ai/", GenerateText.as_view(), name='generate_text')
 ]
