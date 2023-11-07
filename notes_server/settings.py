@@ -101,7 +101,7 @@ DATABASES = {
         "NAME": "notes",
         "USER": "notes",
         "PASSWORD": "notes",
-        "HOST": "http://134.0.118.64",
+        "HOST": "134.0.118.64",
     }
 }
 
