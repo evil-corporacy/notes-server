@@ -1,6 +1,6 @@
 from django.urls import path
-from notes.views.ai import GenerateText
+from notes.views.ai import Ai
 
 urlpatterns = [
-    path("ai/", GenerateText.as_view(), name='generate_text')
+    path("ai/", Ai.as_view(), name='ai')
 ]

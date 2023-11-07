@@ -8,6 +8,7 @@ import openai
 import json
 from notes.shared.data.openai_instruction import instruction
 from dotenv import load_dotenv
+
 load_dotenv()
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -34,15 +35,26 @@ def generate_text(messages):
         return {"error": True}
 
 
-class GenerateText(APIView):
-    def post(self, request):
+class Ai(APIView):
+    def post(self, request, *args, **kwargs):
         try:
+            chat_id = request.query_params.get("id")
+            print(chat_id)
             data = request.data
             messages = data.get("messages", [])
             prompt = data.get("prompt", '')
             messages.append(prompt)
             answer = generate_text(messages)
             response = {"success": True, "answer": answer}
+            return Response(response, status=status.HTTP_200_OK, content_type="application/json")
+        except ParseError as e:
+            return Response({'error': 'Ошибка в формате JSON'}, status=status.HTTP_400_BAD_REQUEST,
+                            content_type="application/json")
+
+    def get(self, request, *args, **kwargs):
+        try:
+            chat_id = request.query_params.get("id")
+            response = {"id": chat_id}
             return Response(response, status=status.HTTP_200_OK, content_type="application/json")
         except ParseError as e:
             return Response({'error': 'Ошибка в формате JSON'}, status=status.HTTP_400_BAD_REQUEST,
