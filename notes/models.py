@@ -8,6 +8,14 @@ class User(models.Model):
     email = models.EmailField()
     passwordHash = models.TextField()
 
+    def to_json(self):
+        return {
+            "id": self.id,
+            "nickname": self.nickname,
+            "email": self.email,
+            "passwordHash": self.passwordHash
+        }
+
 
 class Vault(models.Model):
     id = models.CharField(max_length=32, primary_key=True)

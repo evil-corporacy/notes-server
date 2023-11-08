@@ -49,6 +49,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "notes",
+    "rest_framework_simplejwt",
     "django.contrib.admin",
     'corsheaders',
     "django.contrib.auth",
