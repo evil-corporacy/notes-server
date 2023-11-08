@@ -1,0 +1,30 @@
+_id: req_f55e449a40fb4b7aac2fdbd24848736f
+type: Request
+parentId: wrk_51444de2968f4ba0ba74a94bb09dfa82
+modified: 1699338990167
+created: 1699338970712
+url: http://localhost:8000/api/apikeys/?id=123
+name: "get key "
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"key": "12321"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1697372094374.125
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

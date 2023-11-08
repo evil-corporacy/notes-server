@@ -1,0 +1,81 @@
+_id: req_beba2d4ef5ed427c8c345d91ff3f6cad
+type: Request
+parentId: wrk_51444de2968f4ba0ba74a94bb09dfa82
+modified: 1699363528506
+created: 1697896480770
+url: http://localhost:8000/api/ai/
+name: gpt
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    	"messages": [
+    		{
+    			"content": "ОТВЕЕЕЕЕТЬ",
+    			"role": "user"
+    		},
+    		{
+    			"content": [
+    				{
+    					"content": "Долбаеб",
+    					"type": "text"
+    				}
+    			],
+    			"role": "assistant"
+    		},
+    		{
+    			"content": "ЕБАТЬ ТЫ РАБОТАЕШЬ",
+    			"role": "user"
+    		},
+    		{
+    			"content": [
+    				{
+    					"content": "Да, я работаю",
+    					"type": "heading-1"
+    				},
+    				{
+    					"content": "Чем могу помочь?",
+    					"type": "text"
+    				}
+    			],
+    			"role": "assistant"
+    		},
+    		{
+    			"content": "ДААААААААААААААААААА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    			"role": "user"
+    		},
+    		{
+    			"content": "",
+    			"role": "assistant"
+    		},
+    		{
+    			"content": "ДААААААААААААААААААА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    			"role": "user"
+    		},
+    		{
+    			"content": "",
+    			"role": "assistant"
+    		}
+    	],
+    	"prompt": {
+    		"content": "ДААААААААААААААААААА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
+    		"role": "user"
+    	}
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1697372094383.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

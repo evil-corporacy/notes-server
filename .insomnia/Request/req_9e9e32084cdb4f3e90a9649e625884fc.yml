@@ -1,0 +1,31 @@
+_id: req_9e9e32084cdb4f3e90a9649e625884fc
+type: Request
+parentId: fld_a593e40b25a64f0789eec90ea90b0b99
+modified: 1699455169530
+created: 1699441572978
+url: http://localhost:8000/api/auth/login
+name: login
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |
+    {
+    	"nickname": "stasyausd",
+    	"password": "QWErty123"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1698405831901
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

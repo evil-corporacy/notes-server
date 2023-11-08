@@ -1,0 +1,33 @@
+_id: req_0dd1168b46644893920f4f8d9ccac1f6
+type: Request
+parentId: fld_a593e40b25a64f0789eec90ea90b0b99
+modified: 1699456049098
+created: 1699456020946
+url: http://localhost:8000/api/auth/
+name: get me
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: |
+    {
+    	"nickname": "stasyausd",
+    	"password": "QWErty123"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication:
+  type: bearer
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk5NDU2MDA1LCJpYXQiOjE2OTk0NTU3MDUsImp0aSI6Ijg5NGE4MGI5YTBlODRlMDk5N2I5YmFhZDFmNmJmOWYwIiwidXNlcl9pZCI6IkgzSTJNWE9oSDFGY1BHT1VQRE50RXVwN3d2RHA5ZjlPIn0.OaIMnBYOzs6x-k0HPKFfUc7q1gLfTnH5HueFLScSLOQ
+metaSortKey: -1697888963161
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,31 @@
+_id: req_9a044aee693f449fb1ef7449df9afb21
+type: Request
+parentId: wrk_51444de2968f4ba0ba74a94bb09dfa82
+modified: 1697372809356
+created: 1697372094421
+url: http://localhost:8000/notes
+name: New Request
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    	"name": "Первый ноут",
+    	"content": "# Заголовок \n ## Подзаголовок \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac odio ac mauris fermentum tincidunt. Mauris venenatis luctus arcu, ac varius erat. Nullam id erat ac ex consectetur consectetur ac id lectus. Nullam sodales, turpis eu bibendum feugiat, dui sapien vulputate neque, ut ullamcorper ex eros in neque. Nullam eget ante non libero scelerisque tincidunt. \n ### Подподзаголовок \n - Элемент списка \n - Еще один элемент списка \n - И еще один элемент списка \n 1. Нумерованный элемент списка \n 2. Другой нумерованный элемент списка \n 3. И так далее \n > Это цитата \n **Жирный текст** \n *Курсив* \n [Ссылка на пример](https://example.com) \n![Изображение](https://example.com/image.png)"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1697372094421
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

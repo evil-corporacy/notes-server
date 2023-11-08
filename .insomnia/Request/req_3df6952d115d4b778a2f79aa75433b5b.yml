@@ -1,0 +1,33 @@
+_id: req_3df6952d115d4b778a2f79aa75433b5b
+type: Request
+parentId: fld_a593e40b25a64f0789eec90ea90b0b99
+modified: 1699455136211
+created: 1699439561077
+url: http://localhost:8000/api/auth/registration
+name: registration
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"nickname": "stasyausd",
+    	"email": "chichi@mail.dcom",
+    	"password": "QWErty123",
+    	"checkPassword": "QWErty123"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1699439569381
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

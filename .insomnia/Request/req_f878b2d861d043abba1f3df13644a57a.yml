@@ -1,0 +1,33 @@
+_id: req_f878b2d861d043abba1f3df13644a57a
+type: Request
+parentId: wrk_51444de2968f4ba0ba74a94bb09dfa82
+modified: 1697468470688
+created: 1697468230265
+url: http://localhost:8000/auth/register
+name: registration
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"nickname": "Stasyan",
+    	"email": "iamgenii@yandex.ru",
+    	"password": "49290471HUESOS",
+    	"check_password": "49290471HUESOS"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+  - name: User-Agent
+    value: insomnia/2023.5.8
+authentication: {}
+metaSortKey: -1697372094396
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
