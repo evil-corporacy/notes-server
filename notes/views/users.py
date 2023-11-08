@@ -6,6 +6,7 @@ from ..features.generate_tokens import generate_token
 from ..validations.check_cyrillic import check_cyrillic
 from ..features.generate_random_string import generate_random_string
 from ..validations.check_json import check_json
+from rest_framework_simplejwt.tokens import AccessToken
 import bcrypt
 
 
@@ -29,7 +30,7 @@ class Login(APIView):
                 "success": False,
                 "message": "Неверный логин или пароль"
             }
-            return Response(response, status=status.HTTP_200_OK, content_type="application/json")
+            return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
 
 
 class Registration(APIView):
@@ -83,5 +84,8 @@ class Registration(APIView):
 
 class GetMe(APIView):
     def get(self, request):
-        response = request.headers["Authorization"]
+        token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
+        user_id = token.payload["user_id"]
+        data = User.objects.get(id=user_id).to_json()
+        response = {"success": True, "data": data}
         return Response(response, status.HTTP_200_OK, content_type="application/json")
