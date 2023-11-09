@@ -8,5 +8,5 @@ urlpatterns = [
     path("apikeys/", ApiKeys.as_view(), name='apikeys'),
     path("auth/login", Login.as_view(), name='login'),
     path("auth/registration", Registration.as_view(), name='registration'),
-    path("auth/", GetMe.as_view(), name='get me'),
+    path("auth/me", GetMe.as_view(), name='get me'),
 ]
