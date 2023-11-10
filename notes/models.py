@@ -26,6 +26,16 @@ class Vault(models.Model):
     tags = ArrayField(models.CharField(max_length=40), max_length=10)
     # notes = ArrayField(models.ForeignKey(Note, on_delete=models.CASCADE))
 
+    def to_json(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "user": self.user,
+            "isPublic": self.isPublic,
+            "description": self.description,
+            "tags": self.tags,
+        }
+
 
 class Note(models.Model):
     id = models.CharField(max_length=32, primary_key=True)
@@ -34,11 +44,26 @@ class Note(models.Model):
     content = models.JSONField()
     vault = models.ForeignKey(Vault, on_delete=models.CASCADE)
 
+    def to_json(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "colors": self.colors,
+            "content": self.content,
+            "vault": self.vault,
+        }
+
 
 class OpenaiApiKey(models.Model):
     id = models.CharField(max_length=32, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    keyHash = models.TextField()
+    key = models.TextField()
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "key": self.key,
+        }
 
 
 class AiChat(models.Model):
@@ -47,3 +72,12 @@ class AiChat(models.Model):
     apikey = models.ForeignKey(OpenaiApiKey, on_delete=models.CASCADE)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)
     keyHash = models.TextField()
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "apikey": self.apikey,
+            "note": self.note,
+            "keyHash": self.keyHash,
+        }

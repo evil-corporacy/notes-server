@@ -109,7 +109,7 @@ WSGI_APPLICATION = "notes_server.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "notes",
+        "NAME": "notes_db",
         "USER": "notes",
         "PASSWORD": "notes",
         "HOST": "134.0.118.64",

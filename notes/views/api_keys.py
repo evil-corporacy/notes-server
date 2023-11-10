@@ -4,6 +4,8 @@ from openai import OpenAI
 from notes.models import User
 from rest_framework.response import Response
 from rest_framework import status
+from notes.models import OpenaiApiKey
+from notes.features.generate_random_string import generate_random_string
 
 
 class ApiKeys(APIView):
@@ -11,15 +13,17 @@ class ApiKeys(APIView):
         token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
         user_id = token.payload["user_id"]
         key = request.data["key"]
-        client = OpenAI()
+        client = OpenAI(
+            api_key=key
+        )
 
         try:
-            response = client.chat.completions.create(
+            generated_text = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {
                         "role": "user",
-                        "content": ""
+                        "content": "Напиши короткий текст на любую тему до 10 слов"
                     }
                 ],
                 temperature=1,
@@ -28,17 +32,22 @@ class ApiKeys(APIView):
                 frequency_penalty=0,
                 presence_penalty=0
             )
+
+            user = User.objects.get(id=user_id)
+            new_key = OpenaiApiKey(id=generate_random_string(32), key=key, user=user)
+            new_key.save()
+            response = {"success": True, "message": "Ключ OpenAI сохранен", "key": key, "text": generated_text.choices[0].message.content}
+            return Response(response, status=status.HTTP_200_OK, content_type="application/json")
         except Exception as e:
-
-
-        user = User.objects.get(id=user_id).to_json()
-
-        response = {"success": True, "message": "Ключ OpenAI сохранен", "key": key}
-        return Response(response, status=status.HTTP_200_OK, content_type="application/json")
+            print(e)
+            response = {"success": True, "message": "Ключ не прошел валидацию!", "key": key, "error": str(e)}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
 
     def get(self, request, *args, **kwargs):
-        key_id = request.query_params.get("id")
-        print(key_id)
-        # response = get_key(key_id)
-        # return Response(response, status=status.HTTP_200_OK, content_type="application/json")
+        token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
+        user_id = token.payload["user_id"]
+        apikey = OpenaiApiKey.objects.get(user_id=user_id)
+
+        response = {"success": True, "message": "Ключ получен", "data": apikey.to_json()}
+        return Response(response, status=status.HTTP_200_OK, content_type="application/json")
 
