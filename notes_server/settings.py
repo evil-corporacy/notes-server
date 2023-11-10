@@ -70,6 +70,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "notes.middlewares.error_validation.ErrorValidation",
+    # "notes.middlewares.check_auth.CheckAuth"
 ]
 
 ROOT_URLCONF = "notes_server.urls"

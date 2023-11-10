@@ -5,8 +5,7 @@ from ..models import User
 from ..features.generate_tokens import generate_token
 from ..validations.check_cyrillic import check_cyrillic
 from ..features.generate_random_string import generate_random_string
-from ..validations.check_json import check_json
-from rest_framework_simplejwt.tokens import AccessToken
+from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
 import bcrypt
 
 
@@ -82,10 +81,49 @@ class Registration(APIView):
         return Response(response, status.HTTP_200_OK, content_type="application/json")
 
 
-class GetMe(APIView):
+class Me(APIView):
     def get(self, request):
         token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
         user_id = token.payload["user_id"]
         data = User.objects.get(id=user_id).to_json()
         response = {"success": True, "data": data}
         return Response(response, status.HTTP_200_OK, content_type="application/json")
+
+    def patch(self, request):
+        token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
+        nickname = request.data["nickname"]
+
+        user_id = token.payload["user_id"]
+        user_data = User.objects.get(id=user_id).to_json()
+
+        new_nickname = user_data["nickname"]
+
+        if len(nickname) > 0:
+            new_nickname = nickname
+
+        User.objects.filter(id=user_id).update(nickname=new_nickname)
+        response = {
+            "success": True,
+            "message": "Профиль обновлен",
+        }
+        return Response(response, status.HTTP_200_OK, content_type="application/json")
+
+
+class RefreshTokenView(APIView):
+    def patch(self, request):
+        refresh_token = request.data.get("refresh")
+
+        if not refresh_token:
+            response = {"success": False, "message": "Не удалось обновить токен"}
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            refresh = RefreshToken(refresh_token)
+            new_access_token = str(refresh.access_token)
+            response = {"success": True, "accessToken": new_access_token}
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            response = {"success": False, "message": "Не удалось обновить токен", "error": str(e)}
+            print(e)
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
