@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -60,6 +61,9 @@ INSTALLED_APPS = [
     "rest_framework",
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -109,7 +113,7 @@ WSGI_APPLICATION = "notes_server.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "notes_db",
+        "NAME": "notes",
         "USER": "notes",
         "PASSWORD": "notes",
         "HOST": "134.0.118.64",

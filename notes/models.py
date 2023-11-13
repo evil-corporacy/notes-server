@@ -43,6 +43,13 @@ class Image(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     file = models.ImageField(upload_to="backgrounds/", default=generate_random_string)
 
+    def to_json(self):
+        return {
+            "id": self.id,
+            "user": self.user,
+            "file": self.file
+        }
+
 
 class Note(models.Model):
     id = models.CharField(max_length=32, primary_key=True)
