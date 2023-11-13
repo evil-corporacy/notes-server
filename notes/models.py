@@ -1,5 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from notes.features.generate_random_string import generate_random_string
 
 
 class User(models.Model):
@@ -37,11 +38,18 @@ class Vault(models.Model):
         }
 
 
+class Image(models.Model):
+    id = models.CharField(max_length=32, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    file = models.ImageField(upload_to="backgrounds/", default=generate_random_string)
+
+
 class Note(models.Model):
     id = models.CharField(max_length=32, primary_key=True)
     title = models.CharField(max_length=100)
     colors = ArrayField(models.CharField(max_length=7), max_length=3)
     content = models.JSONField()
+    image = models.ForeignKey(Image, on_delete=models.PROTECT, default=generate_random_string)
     vault = models.ForeignKey(Vault, on_delete=models.CASCADE)
 
     def to_json(self):
@@ -49,6 +57,7 @@ class Note(models.Model):
             "id": self.id,
             "title": self.title,
             "colors": self.colors,
+            "image": self.image,
             "content": self.content,
             "vault": self.vault,
         }
