@@ -25,6 +25,7 @@ class Vault(models.Model):
     isPublic = models.BooleanField()
     description = models.TextField(1000)
     tags = ArrayField(models.CharField(max_length=40), max_length=10)
+    colors = ArrayField(models.CharField(max_length=7), max_length=3)
     # notes = ArrayField(models.ForeignKey(Note, on_delete=models.CASCADE))
 
     def to_json(self):
@@ -35,6 +36,7 @@ class Vault(models.Model):
             "isPublic": self.isPublic,
             "description": self.description,
             "tags": self.tags,
+            "colors": self.colors,
         }
 
 
