@@ -1,10 +1,10 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from notes.features.generate_random_string import generate_random_string
+from notes.features.generate_id import generate_id
 
 
 class User(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     nickname = models.CharField(max_length=24)
     email = models.EmailField()
     passwordHash = models.TextField()
@@ -19,7 +19,7 @@ class User(models.Model):
 
 
 class Vault(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     title = models.TextField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     isPublic = models.BooleanField()
@@ -41,9 +41,9 @@ class Vault(models.Model):
 
 
 class Image(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    file = models.ImageField(upload_to="backgrounds/", default=generate_random_string)
+    file = models.ImageField(upload_to="backgrounds/", default=generate_id())
 
     def to_json(self):
         return {
@@ -54,11 +54,11 @@ class Image(models.Model):
 
 
 class Note(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     title = models.CharField(max_length=100)
     colors = ArrayField(models.CharField(max_length=7), max_length=3)
     content = models.JSONField()
-    image = models.ForeignKey(Image, on_delete=models.PROTECT, default=generate_random_string)
+    image = models.ForeignKey(Image, on_delete=models.PROTECT, default=Image.objects.get(id="FS65NckwXR4rLiPgkaSNTMuK8gv9XNB2"))
     vault = models.ForeignKey(Vault, on_delete=models.CASCADE)
 
     def to_json(self):
@@ -73,7 +73,7 @@ class Note(models.Model):
 
 
 class OpenaiApiKey(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     key = models.TextField()
 
@@ -85,7 +85,7 @@ class OpenaiApiKey(models.Model):
 
 
 class AiChat(models.Model):
-    id = models.CharField(max_length=32, primary_key=True)
+    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     apikey = models.ForeignKey(OpenaiApiKey, on_delete=models.CASCADE)
     note = models.ForeignKey(Note, on_delete=models.CASCADE)

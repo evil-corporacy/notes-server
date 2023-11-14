@@ -4,6 +4,7 @@ from notes.views.api_keys import *
 from notes.views.users import *
 from notes.views.images import *
 from notes.views.vaults import *
+from notes.views.notes import *
 
 urlpatterns = [
     path("ai/", Ai.as_view(), name='ai'),
@@ -15,4 +16,6 @@ urlpatterns = [
     path("image", ImageView.as_view(), name='image'),
     path("vaults", VaultView.as_view(), name='vaults'),
     path("vaults/my", GetUserVaults.as_view(), name='get user vaults'),
+    path("notes", NoteView.as_view(), name='notes'),
+    path("notes/update", UpdateNote.as_view(), name='update note'),
 ]

@@ -5,7 +5,6 @@ from notes.models import User
 from rest_framework.response import Response
 from rest_framework import status
 from notes.models import OpenaiApiKey
-from notes.features.generate_random_string import generate_random_string
 
 
 class ApiKeys(APIView):
@@ -34,7 +33,7 @@ class ApiKeys(APIView):
             )
 
             user = User.objects.get(id=user_id)
-            new_key = OpenaiApiKey(id=generate_random_string(32), key=key, user=user)
+            new_key = OpenaiApiKey(key=key, user=user)
             new_key.save()
             response = {"success": True, "message": "Ключ OpenAI сохранен", "key": key, "text": generated_text.choices[0].message.content}
             return Response(response, status=status.HTTP_200_OK, content_type="application/json")
