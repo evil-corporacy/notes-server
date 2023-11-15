@@ -5,6 +5,7 @@ from ..models import User
 from ..features.generate_tokens import generate_token
 from ..validations.check_cyrillic import check_cyrillic
 from rest_framework_simplejwt.tokens import AccessToken, RefreshToken
+from notes.features.generate_id import generate_id
 import bcrypt
 
 
@@ -68,7 +69,7 @@ class Registration(APIView):
         password_bytes = password.encode("utf-8")
         hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt(16)).decode()
 
-        new_user = User(nickname=nickname, email=email, passwordHash=hashed_password)
+        new_user = User(id=generate_id(), nickname=nickname, email=email, passwordHash=hashed_password)
         new_user.save()
 
         tokens = generate_token(new_user)

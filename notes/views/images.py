@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from notes.models import Image, User
 from rest_framework_simplejwt.tokens import AccessToken
+from notes.features.generate_id import generate_id
 
 
 class ImageView(APIView):
@@ -10,7 +11,7 @@ class ImageView(APIView):
         token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
         user_id = token.payload["user_id"]
         image = request.data["image"]
-        new_image = Image(user_id=user_id, file=image)
+        new_image = Image(id=generate_id(), user_id=user_id, file=image)
         new_image.save()
         data = new_image.to_json()
         response = {"success": True, "data": {

@@ -3,6 +3,7 @@ from notes.models import Vault
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework import status
 from rest_framework.response import Response
+from notes.features.generate_id import generate_id
 
 
 class VaultView(APIView):
@@ -14,10 +15,10 @@ class VaultView(APIView):
             title = request.data["title"]
             description = request.data["description"]
             isPublic = request.data["isPublic"]
-            tags = request.data["tags"]
-            colors = request.data["colors"]
+            tags = []
+            colors = ["#FFFFFF", "0B0D0E", "#0B6BCB"]
 
-            new_vault = Vault(user_id=user_id, title=title, description=description, isPublic=isPublic, tags=tags, colors=colors)
+            new_vault = Vault(id=generate_id(), user_id=user_id, title=title, description=description, isPublic=isPublic, tags=tags, colors=colors)
             new_vault.save()
             data = new_vault.to_json()
 

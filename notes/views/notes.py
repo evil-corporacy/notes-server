@@ -12,7 +12,7 @@ class NoteView(APIView):
             token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
             user_id = token.payload["user_id"]
             title = request.data["title"]
-            colors = request.data["colors"]
+            colors = ["#FFFFFF", "#0B6BCB", "#0B0D0E"]
             vault_id = request.query_params["vault_id"]
 
             vault = Vault.objects.get(id=vault_id, user_id=user_id)
@@ -68,7 +68,9 @@ class NoteView(APIView):
 
             response = {
                 "success": True,
-                "content": note_data["content"]
+                "content": note_data["content"],
+                "title": note_data["title"],
+                "colors": note_data["colors"],
             }
             return Response(response, status=status.HTTP_200_OK, content_type="application/json")
 

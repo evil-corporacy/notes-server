@@ -4,7 +4,7 @@ from notes.features.generate_id import generate_id
 
 
 class User(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
+    id = models.CharField(max_length=32, primary_key=True)
     nickname = models.CharField(max_length=24)
     email = models.EmailField()
     passwordHash = models.TextField()
@@ -19,7 +19,7 @@ class User(models.Model):
 
 
 class Vault(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
+    id = models.CharField(max_length=32, primary_key=True)
     title = models.TextField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     isPublic = models.BooleanField()
@@ -41,7 +41,7 @@ class Vault(models.Model):
 
 
 class Image(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
+    id = models.CharField(max_length=32, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     file = models.ImageField(upload_to="backgrounds/", default=generate_id())
 
@@ -54,7 +54,7 @@ class Image(models.Model):
 
 
 class Note(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
+    id = models.CharField(max_length=32, primary_key=True)
     title = models.CharField(max_length=100)
     colors = ArrayField(models.CharField(max_length=7), max_length=3)
     content = models.JSONField()
@@ -73,7 +73,7 @@ class Note(models.Model):
 
 
 class OpenaiApiKey(models.Model):
-    id = models.CharField(max_length=32, primary_key=True, default=generate_id())
+    id = models.CharField(max_length=32, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     key = models.TextField()
 
