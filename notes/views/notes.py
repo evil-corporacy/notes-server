@@ -66,8 +66,11 @@ class NoteView(APIView):
                 }
                 return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
 
-            if not is_public:
-                note_user = note_data["user"].to_json()
+            response = {
+                "success": True,
+                "content": note_data["content"]
+            }
+            return Response(response, status=status.HTTP_200_OK, content_type="application/json")
 
         except Exception as e:
             response = {
@@ -109,6 +112,45 @@ class NoteView(APIView):
             response = {
                 "success": False,
                 "message": "Не удалось удалить ноут",
+                "error": str(e)
+            }
+            print(e)
+            return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
+
+
+class GetByVault(APIView):
+    def get(self, request):
+        try:
+            token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
+            user_id = token.payload["user_id"]
+            vault_id = request.query_params["id"]
+
+            notes = Note.objects.filter(vault_id=vault_id).values('id', 'title')
+            notes_data = []
+            for note in notes:
+                notes_data.append(note)
+
+            vault = Vault.objects.get(id=vault_id)
+            vault_user = vault.user.to_json()
+            is_public = vault.isPublic
+
+            if not is_public and not vault_user["id"] == user_id:
+                response = {
+                    "success": False,
+                    "message": "Не удалось получить ноут",
+                }
+                return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
+
+            response = {
+                "success": True,
+                "content": notes_data
+            }
+            return Response(response, status=status.HTTP_200_OK, content_type="application/json")
+
+        except Exception as e:
+            response = {
+                "success": False,
+                "message": "Не удалось получить ноут",
                 "error": str(e)
             }
             print(e)

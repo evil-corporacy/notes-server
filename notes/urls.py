@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 from notes.views.ai import *
 from notes.views.api_keys import *
 from notes.views.users import *
@@ -18,4 +18,5 @@ urlpatterns = [
     path("vaults/my", GetUserVaults.as_view(), name='get user vaults'),
     path("notes", NoteView.as_view(), name='notes'),
     path("notes/update", UpdateNote.as_view(), name='update note'),
+    path("notes/byvault", GetByVault.as_view(), name='update note'),
 ]
