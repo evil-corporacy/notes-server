@@ -23,12 +23,12 @@ class Login(APIView):
                 "tokens": tokens
             }
             return Response(response, status=status.HTTP_200_OK, content_type="application/json")
-        else:
-            response = {
-                "success": False,
-                "message": "Неверный логин или пароль"
-            }
-            return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
+
+        response = {
+            "success": False,
+            "message": "Неверный логин или пароль"
+        }
+        return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
 
 
 class Registration(APIView):

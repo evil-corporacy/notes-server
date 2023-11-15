@@ -9,6 +9,7 @@ class VaultView(APIView):
     def post(self, request):
         try:
             token = AccessToken(request.headers["Authorization"].replace("Bearer ", ""))
+            print(token)
             user_id = token.payload["user_id"]
             title = request.data["title"]
             description = request.data["description"]
