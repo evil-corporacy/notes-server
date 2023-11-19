@@ -43,7 +43,7 @@ class Vault(models.Model):
 class Image(models.Model):
     id = models.CharField(max_length=32, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    file = models.ImageField(upload_to="backgrounds/", default=generate_id())
+    file = models.ImageField(upload_to="backgrounds/")
 
     def to_json(self):
         return {
@@ -58,7 +58,7 @@ class Note(models.Model):
     title = models.CharField(max_length=100)
     colors = ArrayField(models.CharField(max_length=7), max_length=3)
     content = models.JSONField()
-    image = models.ForeignKey(Image, on_delete=models.PROTECT, default=Image.objects.get(id="FS65NckwXR4rLiPgkaSNTMuK8gv9XNB2"))
+    image = models.ForeignKey(Image, on_delete=models.PROTECT)
     vault = models.ForeignKey(Vault, on_delete=models.CASCADE)
 
     def to_json(self):
