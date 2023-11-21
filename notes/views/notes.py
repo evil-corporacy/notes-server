@@ -24,7 +24,7 @@ class NoteView(APIView):
                 }
                 return Response(response, status=status.HTTP_400_BAD_REQUEST, content_type="application/json")
 
-            new_note = Note(id=generate_id(), title=title, colors=colors, content=[], vault_id=vault_id)
+            new_note = Note(id=generate_id(), title=title, colors=colors, content=[], vault_id=vault_id, image_id="STcLZoBKjJrl9E1qFVKwG0L872C9XRRl")
             new_note.save()
             data = new_note.to_json()
 
