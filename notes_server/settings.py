@@ -16,10 +16,12 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://ec-notes-client.vercel.app",
+    "http://localhost:8000",
 ]
 CORS_ALLOW_METHODS = [
     "GET",
@@ -43,7 +45,7 @@ SECRET_KEY = "django-insecure-c*j-q+fak8l$vu_bgzgi7ta4&u57*p=_-3aa#87hqr=w18qav4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '134.0.118.64', 'localhost', 'notes.evcorp.ru', 'www.notes.evcorp.ru']
 
 
 # Application definition
@@ -75,6 +77,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "notes.middlewares.error_validation.ErrorValidation",
+    'notes.middlewares.cors_middleware.CorsMiddleware',
     # "notes.middlewares.check_auth.CheckAuth"
 ]
 
