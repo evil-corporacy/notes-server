@@ -10,5 +10,12 @@
       <jdbc-url>jdbc:postgresql://134.0.118.64:5432/notes</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="notes@134.0.118.64" uuid="cac75b0b-0a25-4cbd-8e31-175a74697478">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://134.0.118.64:5432/notes</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
